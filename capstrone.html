@@ -1,0 +1,787 @@
+<!--
+  Fashionista - Responsive E-Commerce Landing Page
+  Single-file HTML + CSS (no JavaScript)
+  Instructions: Save this file as index.html and open in a browser.
+  Replace placeholder images (Unsplash links) with local images in /images if desired.
+-->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Fashionista — Responsive E-Commerce UI</title>
+    <meta name="description" content="Responsive fashion e-commerce landing page built with HTML5 and CSS3 only.">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #F7F7FB;
+            --card: #ffffff;
+            --muted: #6B7280;
+            --accent: #FF6B6B;
+            --accent-2: #1F8EF1;
+            --radius: 14px;
+            --container-max: 1200px;
+            --gap: 1.25rem;
+            --transition: all .25s ease;
+            --shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            color: #0f172a;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.45;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1rem
+        }
+
+        /* Utility */
+        .flex {
+            display: flex
+        }
+
+        .center {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .btn {
+            display: inline-block;
+            padding: .6rem 1rem;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition)
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: var(--accent-2);
+            border: 1px solid rgba(31, 142, 241, .12)
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1rem
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0
+        }
+
+        /* NAV */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: saturate(140%) blur(6px);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+            z-index: 50
+        }
+
+        nav .nav-inner {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem
+        }
+
+        .brand .logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #FF9E9E);
+            display: inline-block
+        }
+
+        .brand h3 {
+            font-size: 1.05rem;
+            margin: 0
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            background: #F2F4F8;
+            padding: .35rem .6rem;
+            border-radius: 10px
+        }
+
+        .search input {
+            border: 0;
+            background: transparent;
+            outline: none;
+            min-width: 180px
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        /* HERO */
+        .hero {
+            padding: 3.5rem 0;
+            background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent), url('https://images.unsplash.com/photo-1520975913849-6d07e3f470bb?auto=format&fit=crop&w=1400&q=60');
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            margin: 1.25rem 0
+        }
+
+        .hero .hero-inner {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 3rem 2rem;
+            color: #07122a
+        }
+
+        .hero .copy {
+            flex: 1
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            line-height: 1.05
+        }
+
+        .hero p {
+            color: var(--muted);
+            margin-top: .6rem
+        }
+
+        .hero .cta {
+            margin-top: 1rem
+        }
+
+        .hero .visual {
+            flex: 1;
+            display: flex;
+            justify-content: center
+        }
+
+        .hero .visual img {
+            max-width: 420px;
+            border-radius: 12px;
+            box-shadow: var(--shadow)
+        }
+
+        /* Flash */
+        .flash {
+            margin-top: 1rem;
+            background: linear-gradient(90deg, #FFEFEE, #FFF7F0);
+            padding: .6rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: .75rem
+        }
+
+        .flash strong {
+            color: var(--accent)
+        }
+
+        /* MAIN LAYOUT */
+        .layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: var(--gap);
+            align-items: start;
+            margin: 2rem 0
+        }
+
+        /* SIDEBAR */
+        aside.filters {
+            position: relative
+        }
+
+        .filters .filter-block {
+            margin-bottom: 1rem
+        }
+
+        .filters h4 {
+            margin-bottom: .5rem
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            margin-bottom: .4rem
+        }
+
+        input[type='checkbox'] {
+            width: 16px;
+            height: 16px
+        }
+
+        /* CATEGORIES */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem
+        }
+
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 120px;
+            background: #eee
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scale(1);
+            transition: var(--transition)
+        }
+
+        .category-card:hover img {
+            transform: scale(1.06)
+        }
+
+        .category-card .label {
+            position: absolute;
+            left: 12px;
+            bottom: 12px;
+            background: rgba(0, 0, 0, 0.45);
+            color: #fff;
+            padding: .3rem .6rem;
+            border-radius: 8px;
+            font-weight: 600
+        }
+
+        /* PRODUCT GRID */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem
+        }
+
+        .product {
+            background: var(--card);
+            border-radius: 12px;
+            padding: .75rem;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            transition: var(--transition)
+        }
+
+        .product:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06)
+        }
+
+        .product .thumb {
+            width: 100%;
+            height: 220px;
+            border-radius: 8px;
+            overflow: hidden
+        }
+
+        .product .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .price {
+            font-weight: 700
+        }
+
+        .add {
+            display: flex;
+            gap: .5rem
+        }
+
+        .tag {
+            padding: .2rem .5rem;
+            border-radius: 6px;
+            background: #F0F7FF;
+            font-size: .8rem;
+            color: var(--accent-2)
+        }
+
+        /* BEST SELLER */
+        .best-seller {
+            margin-top: 1rem
+        }
+
+        .best-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem
+        }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem
+        }
+
+        .testimonial {
+            padding: 1rem;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #fff, #FBFCFF);
+        }
+
+        .testimonial img {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%
+        }
+
+        .quote {
+            color: var(--muted);
+            margin-top: .5rem
+        }
+
+        /* NEWSLETTER */
+        .newsletter {
+            padding: 1.25rem;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #fff, #fff);
+            display: flex;
+            align-items: center;
+            gap: 1rem
+        }
+
+        .newsletter form {
+            display: flex;
+            gap: .5rem;
+            flex: 1
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: .6rem;
+            border-radius: 10px;
+            border: 1px solid rgba(15, 23, 42, 0.06)
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 2.5rem;
+            padding: 2rem 0;
+            background: transparent
+        }
+
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: start
+        }
+
+        /* Responsive */
+        @media (max-width:1000px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .best-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .hero .hero-inner {
+                flex-direction: column;
+                text-align: center
+            }
+
+            .hero .visual img {
+                max-width: 320px
+            }
+
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            aside.filters {
+                order: 2
+            }
+        }
+
+        @media (max-width:600px) {
+            :root {
+                --gap: .85rem
+            }
+
+            nav .nav-inner {
+                height: 64px
+            }
+
+            .search input {
+                min-width: 80px
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr
+            }
+
+            .hero {
+                padding: 1.5rem 0
+            }
+
+            .hero .hero-inner {
+                padding: 1rem
+            }
+        }
+
+        /* Small accessibility tweaks */
+        a[role="button"] {
+            cursor: pointer
+        }
+
+        .sr-only {
+            position: absolute;
+            left: -9999px
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav aria-label="Main navigation">
+        <div class="container nav-inner">
+            <div class="brand">
+                <span class="logo" aria-hidden="true"></span>
+                <div>
+                    <h3>Fashionista</h3>
+                    <div style="font-size:.75rem;color:var(--muted)">Modern Apparel</div>
+                </div>
+            </div>
+
+            <div class="search" role="search" aria-label="Product search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M21 21l-4.35-4.35" stroke="#6B7280" stroke-width="1.6" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <circle cx="11" cy="11" r="6" stroke="#6B7280" stroke-width="1.6"></circle>
+                </svg>
+                <input type="search" placeholder="Search products, brands..." aria-label="Search products">
+            </div>
+
+            <div class="nav-right">
+                <a class="icon" href="#cart" aria-label="Cart">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 6h15l-1.5 9h-12z" stroke="#0f172a" stroke-width="1.2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <circle cx="10" cy="20" r="1" fill="#0f172a"></circle>
+                        <circle cx="18" cy="20" r="1" fill="#0f172a"></circle>
+                    </svg>
+                </a>
+                <a class="icon" href="#login" aria-label="Login">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- HERO + FLASH -->
+        <section class="hero card" aria-labelledby="hero-heading">
+            <div class="hero-inner">
+                <div class="copy">
+                    <small class="tag">New Collection • 2025</small>
+                    <h1 id="hero-heading">Discover Your Signature Style</h1>
+                    <p>Shop the latest arrivals from independent designers and trusted brands. Free shipping on orders
+                        over ₹1,499.</p>
+                    <div class="cta">
+                        <a class="btn" href="#products">Shop Now</a>
+                        <a class="btn secondary" href="#categories">Explore Categories</a>
+                    </div>
+
+                    <div class="flash" style="margin-top:1.25rem">
+                        <strong>Flash Sale:</strong>
+                        <div style="color:var(--muted);font-size:.95rem">Up to 50% off on selected jackets — limited
+                            time only</div>
+                    </div>
+                </div>
+
+                <div class="visual">
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1000&q=60"
+                        alt="Model wearing fashion outfit">
+                </div>
+            </div>
+        </section>
+
+        <!-- LAYOUT: SIDEBAR + PRODUCTS -->
+        <div class="layout">
+
+            <!-- SIDEBAR -->
+            <aside class="filters card" aria-labelledby="filters-heading">
+                <h4 id="filters-heading">Filters</h4>
+
+                <div class="filter-block">
+                    <h5 style="margin:.6rem 0">Category</h5>
+                    <div class="checkbox"><input type="checkbox" id="cat-women"><label for="cat-women">Women</label>
+                    </div>
+                    <div class="checkbox"><input type="checkbox" id="cat-men"><label for="cat-men">Men</label></div>
+                    <div class="checkbox"><input type="checkbox" id="cat-access"><label
+                            for="cat-access">Accessories</label></div>
+                </div>
+
+                <div class="filter-block">
+                    <h5 style="margin:.6rem 0">Price</h5>
+                    <div class="checkbox"><input type="checkbox" id="p1"><label for="p1">Under ₹999</label></div>
+                    <div class="checkbox"><input type="checkbox" id="p2"><label for="p2">₹999 - ₹2,999</label></div>
+                    <div class="checkbox"><input type="checkbox" id="p3"><label for="p3">Above ₹2,999</label></div>
+                </div>
+
+                <div class="filter-block">
+                    <h5 style="margin:.6rem 0">Color</h5>
+                    <div class="checkbox"><input type="checkbox" id="c1"><label for="c1">Black</label></div>
+                    <div class="checkbox"><input type="checkbox" id="c2"><label for="c2">White</label></div>
+                    <div class="checkbox"><input type="checkbox" id="c3"><label for="c3">Pastel</label></div>
+                </div>
+
+                <div class="filter-block">
+                    <h5 style="margin:.6rem 0">Brands</h5>
+                    <div class="checkbox"><input type="checkbox" id="b1"><label for="b1">Urban Chic</label></div>
+                    <div class="checkbox"><input type="checkbox" id="b2"><label for="b2">Studio 21</label></div>
+                    <div class="checkbox"><input type="checkbox" id="b3"><label for="b3">Modo</label></div>
+                </div>
+
+                <div style="margin-top:1rem"><a class="btn" href="#">Apply Filters</a></div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <section aria-labelledby="products" style="min-width:0">
+
+                <!-- Categories -->
+                <section class="card" style="margin-bottom:1rem">
+                    <h3 id="categories" style="margin-bottom:.75rem">Featured Categories</h3>
+                    <div class="categories">
+                        <a class="category-card" href="#"><img
+                                src="https://images.unsplash.com/photo-1602303894456-398ce544d90b?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHdvbWVuJTIwZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D"
+                                alt="Women category"><span class="label">Women</span></a>
+                        <a class="category-card" href="#"><img
+                                src="https://plus.unsplash.com/premium_photo-1706806943520-0387c9b63664?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fG1lbiUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D"
+                                alt="Men category"><span class="label">Men</span></a>
+                        <a class="category-card" href="#"><img
+                                src="https://images.unsplash.com/photo-1571974096035-bc3568627608?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fGFjY2Vzc29yaWVzfGVufDB8fDB8fHww"
+                                alt="Accessories"><span class="label">Accessories</span></a>
+                    </div>
+                </section>
+
+                <!-- Products Grid -->
+                <section class="card" id="products">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+                        <h3>New Arrivals</h3>
+                        <div style="color:var(--muted);font-size:.95rem">Showing 12 results</div>
+                    </div>
+
+                    <div class="product-grid">
+
+                        <!-- Product 1 -->
+                        <article class="product" aria-labelledby="p1-title">
+                            <div class="thumb"><img
+                                    src="https://plus.unsplash.com/premium_photo-1683134070744-3b53c07a94ec?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzA5fHxibHVlJTIwamFja2V0fGVufDB8fDB8fHww"
+                                    alt="Blue jacket"></div>
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div>
+                                    <h4 id="p1-title" style="font-size:1rem">Oversized Blue Jacket</h4>
+                                    <div style="color:var(--muted);font-size:.9rem">Urban Chic</div>
+                                </div>
+                                <div class="price">₹2,499</div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+                                <div class="tag">New</div>
+                                <div class="add"><a class="btn" href="#">Add</a></div>
+                            </div>
+                        </article>
+
+                        <!-- Product 2 -->
+                        <article class="product" aria-labelledby="p2-title">
+                            <div class="thumb"><img
+                                    src="https://images.unsplash.com/photo-1665029511514-9dfcaa5b5058?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTU1fHxyZWxheGVkJTIwd2hpdGUlMjBzaGlydHxlbnwwfHwwfHx8MA%3D%3D"
+                                    alt="Casual white shirt"></div>
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div>
+                                    <h4 id="p2-title" style="font-size:1rem">Relaxed White Shirt</h4>
+                                    <div style="color:var(--muted);font-size:.9rem">Studio 21</div>
+                                </div>
+                                <div class="price">₹899</div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+                                <div class="tag">Popular</div>
+                                <div class="add"><a class="btn" href="#">Add</a></div>
+                            </div>
+                        </article>
+
+                        <!-- Product 3 -->
+                        <article class="product" aria-labelledby="p3-title">
+                            <div class="thumb"><img
+                                    src="https://images.unsplash.com/photo-1603035944950-c6e62e45a6ff?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTQ4fHxtaW5pbWFsaXN0JTIwbGVhdGhlciUyMGJhZ3xlbnwwfHwwfHx8MA%3D%3D"
+                                    alt="Black handbag"></div>
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div>
+                                    <h4 id="p3-title" style="font-size:1rem">Minimalist Leather Bag</h4>
+                                    <div style="color:var(--muted);font-size:.9rem">Modo</div>
+                                </div>
+                                <div class="price">₹1,499</div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+                                <div class="tag">Best</div>
+                                <div class="add"><a class="btn" href="#">Add</a></div>
+                            </div>
+                        </article>
+
+                        <!-- Product 4 -->
+                        <article class="product" aria-labelledby="p4-title">
+                            <div class="thumb"><img
+                                    src="https://plus.unsplash.com/premium_photo-1681234560016-c914740c484e?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fHN1bW1lciUyMGRyZXNzfGVufDB8fDB8fHww"
+                                    alt="Summer dress"></div>
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div>
+                                    <h4 id="p4-title" style="font-size:1rem">Floral Summer Dress</h4>
+                                    <div style="color:var(--muted);font-size:.9rem">Bloom</div>
+                                </div>
+                                <div class="price">₹1,199</div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+                                <div class="tag">Sale</div>
+                                <div class="add"><a class="btn" href="#">Add</a></div>
+                            </div>
+                        </article>
+
+                        <!-- Product 5 -->
+                        <article class="product" aria-labelledby="p5-title">
+                            <div class="thumb"><img
+                                    src="https://images.unsplash.com/photo-1711502007412-1a24650550d5?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTc0fHxyZXRybyUyMHNuZWFrZXJzfGVufDB8fDB8fHww"
+                                    alt="Sneakers"></div>
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div>
+                                    <h4 id="p5-title" style="font-size:1rem">Retro Sneakers</h4>
+                                    <div style="color:var(--muted);font-size:.9rem">Stride</div>
+                                </div>
+                                <div class="price">₹2,199</div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+                                <div class="tag">Trending</div>
+                                <div class="add"><a class="btn" href="#">Add</a></div>
+                            </div>
+                        </article>
+
+                        <!-- Product 6 -->
+                        <article class="product" aria-labelledby="p6-title">
+                            <div class="thumb"><img
+                                    src="https://plus.unsplash.com/premium_photo-1758611677958-c46e8f1449bf?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODl8fHdvb2wlMjBibGVuZCUyMGNvYXR8ZW58MHx8MHx8fDA%3D"
+                                    alt="Stylish coat"></div>
+                            <div style="display:flex;justify-content:space-between;align-items:center">
+                                <div>
+                                    <h4 id="p6-title" style="font-size:1rem">Wool Blend Coat</h4>
+                                    <div style="color:var(--muted);font-size:.9rem">Nord</div>
+                                </div>
+                                <div class="price">₹3,499</div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.6rem">
+                                <div class="tag">Premium</div>
+                                <div class="add"><a class="btn" href="#">Add</a></div>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </section>
+
+                <!-- BEST SELLER -->
+                <section class="card best-seller">
+                    <h3 style="margin-bottom:.75rem">Best Sellers</h3>
+                    <div class="best-grid">
+                        <div class="card" style="display:flex;gap:1rem;align-items:center">
+                            <img src="https://media.istockphoto.com/id/1357102818/photo/pretty-thoughtful-girl-in-trench-coat-dreamily-looking-aside-walking-around-cozy-city-street.jpg?s=612x612&w=0&k=20&c=2kkANgPinl0tmK5DSn_xUBfV1mDzcpQI4wrrJcJRa8c="
+                                alt="Best seller" style="width:72px;height:72px;border-radius:8px;object-fit:cover">
+                            <div>
+                                <div style="font-weight:700">Classic Trench Coat</div>
+                                <div style="color:var(--muted);font-size:.9rem">₹4,199</div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="display:flex;gap:1rem;align-items:center">
+                            <img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGphY2tldHxlbnwwfHwwfHx8MA%3D%3D"
+                                alt="Best seller2" style="width:72px;height:72px;border-radius:8px;object-fit:cover">
+                            <div>
+                                <div style="font-weight:700">Linen Shirt</div>
+                                <div style="color:var(--muted);font-size:.9rem">₹799</div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="display:flex;gap:1rem;align-items:center">
+                            <img src="https://images.unsplash.com/photo-1536305030011-84df8a2d3b7b?auto=format&fit=crop&w=300&q=60"
+                                alt="Best seller3" style="width:72px;height:72px;border-radius:8px;object-fit:cover">
+                            <div>
+                                <div style="font-weight:700">Leather Tote</div>
+                                <div style="color:var(--muted);font-size:.9rem">₹1,699</div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="display:flex;gap:1rem;align-items:center">
+                            <img src="https://images.unsplash.com/photo-15149969
