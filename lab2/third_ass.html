@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Coffee Menu Cards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fbf8f6;
+            --card: #ffffff;
+            --muted: #8b8b8b;
+            --accent: #c69b3b;
+            /* gold */
+            --shadow: 0 10px 25px rgba(29, 20, 10, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            --radius: 14px;
+            --gap: 28px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 32px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* subtle patterned backdrop similar to the reference image */
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background-image: url('/mnt/data/cute.jpg');
+            background-repeat: repeat;
+            background-size: 450px;
+            opacity: 0.12;
+            filter: blur(0.6px) saturate(90%);
+        }
+
+        .backdrop::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9));
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 1300px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gap);
+        }
+
+        /* card */
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.96));
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            box-shadow: var(--shadow), 0 8px 18px rgba(215, 165, 91, 0.06);
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform .25s cubic-bezier(.2, .9, .2, 1), box-shadow .25s;
+            border: 1px solid rgba(200, 180, 150, 0.06);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 42px rgba(21, 14, 8, 0.12);
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #141414
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 18px
+        }
+
+        .desc {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-top: 12px
+        }
+
+        /* spacing to emulate reference: left column slightly shifted down in some rows */
+        .grid>.card:nth-child(2n+1) {
+            /* every odd card */
+            /* no change by default */
+        }
+
+        /* responsive */
+        @media (max-width:1100px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (max-width:680px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            body {
+                padding: 28px
+            }
+        }
+
+        /* small helper to match the look: faint top-left corner accent */
+        .price::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border-radius: 2px;
+            background: linear-gradient(180deg, #f3d59a, #c69b3b);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <div class="wrapper">
+        <div class="grid">
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Cappuccino</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Americano</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Espresso</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Macchiato</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Mocha</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Coffee Latte</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Piccolo Latte</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Ristretto</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-head">
+                    <div class="title">Affogato</div>
+                    <div class="price">$49</div>
+                </div>
+                <p class="desc">Usage of the Internet is becoming more common due to rapid advance.</p>
+            </article>
+
+        </div>
+    </div>
+</body>
+
+
+</html>
